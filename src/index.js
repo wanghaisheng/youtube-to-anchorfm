@@ -25,6 +25,7 @@ async function main() {
   const dirPath = './videos/';
 
   const files = fs.readdirSync(dirPath);
+  console.log('files:',files)
 
   const arr = []
   files.forEach((val, i) => {
