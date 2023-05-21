@@ -13,7 +13,7 @@ const defaultValues = {
   POSTPROCESSOR_ARGS: '',
   SET_PUBLISH_DATE: false,
   AUDIO_FILE_FORMAT: 'mp3',
-  AUDIO_FILE_TEMPLATE: 'episode.%(ext)s',
+  AUDIO_FILE_TEMPLATE: '.%(ext)s',
   THUMBNAIL_FILE_FORMAT: 'jpg',
   THUMBNAIL_FILE_TEMPLATE: 'thumbnail.%(ext)s',
   PUPETEER_HEADLESS: true,
