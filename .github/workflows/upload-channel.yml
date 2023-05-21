@@ -52,6 +52,7 @@ jobs:
           videoorchannel: 'channel'
           playlisturl: ''
           URL: ${{ github.event.inputs.channel }}       
-      - run: python dumpvideoids.py                      
-      - run: npm ci
-      - run: npm start
+        run:  |
+            python dumpvideoids.py                      
+            npm ci
+            npm start
