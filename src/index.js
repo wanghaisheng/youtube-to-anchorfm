@@ -11,9 +11,9 @@ function validateYoutubeVideoId(json) {
   }
 }
 
-function getYoutubeVideoId() {
+function getYoutubeVideoId(path) {
   try {
-    const json = JSON.parse(fs.readFileSync(env.EPISODE_PATH, 'utf-8'));
+    const json = JSON.parse(fs.readFileSync(path, 'utf-8'));
     validateYoutubeVideoId(json);
     return json.id;
   } catch (err) {
@@ -22,18 +22,25 @@ function getYoutubeVideoId() {
 }
 
 async function main() {
-  const youtubeVideoId = getYoutubeVideoId();
+  const dirPath = './videos/';
 
-  const youtubeVideoInfo = await getVideoInfo(youtubeVideoId);
-  const { title, description, uploadDate } = youtubeVideoInfo;
-  console.log(`title: ${title}`);
-  console.log(`description: ${description}`);
-  console.log(`Upload date: ${JSON.stringify(uploadDate)}`);
+  const files = fs.readdirSync(dirPath);
 
-  await Promise.all([downloadThumbnail(youtubeVideoId), downloadAudio(youtubeVideoId)]);
+  const arr = []
+  files.forEach((val, i) => {
+  
+    const youtubeVideoId = getYoutubeVideoId(path.join(dirPath, val));
 
-  console.log('Posting episode to anchorfm');
-  await postEpisode(youtubeVideoInfo);
+    const youtubeVideoInfo = await getVideoInfo(youtubeVideoId);
+    const { title, description, uploadDate } = youtubeVideoInfo;
+    console.log(`title: ${title}`);
+    console.log(`description: ${description}`);
+    console.log(`Upload date: ${JSON.stringify(uploadDate)}`);
+
+    await Promise.all([downloadThumbnail(youtubeVideoId), downloadAudio(youtubeVideoId)]);
+
+    console.log('Posting episode to anchorfm');
+    await postEpisode(youtubeVideoInfo);
 }
 
 main()
