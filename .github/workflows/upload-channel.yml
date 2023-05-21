@@ -24,10 +24,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: "3.10"
+      - name: Download ffmpeg for Linux
+
+        run:  |
+            sudo apt update
+            sudo apt-get install -y libgbm-dev
+            sudo apt-get install libnss3 libnss3-tools libxss1 libgtk-3-0 -y            
+            sudo apt install ffmpeg
       - name: Install all necessary packages
         run: pip install  yt_dlp
       - name: Run the ids script
@@ -35,8 +46,6 @@ jobs:
         env:
           URL: ${{ github.event.inputs.channel }}          
       - name: Upload Episode from YouTube To Anchor.Fm
-        uses: ./ # Uses an action in the root directory
-        id: hello
         env:
           ANCHOR_EMAIL: ${{ github.event.inputs.ANCHOR_EMAIL }}     
           ANCHOR_PASSWORD: ${{ github.event.inputs.ANCHOR_PASSWORD }} 
@@ -47,4 +56,5 @@ jobs:
           videoorchannel: 'channel'
           playlisturl: ''
           URL: ${{ github.event.inputs.channel }}       
-
+      - run: npm ci
+      - run: npm start
