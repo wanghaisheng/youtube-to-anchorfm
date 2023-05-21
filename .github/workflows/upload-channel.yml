@@ -31,7 +31,7 @@ jobs:
       - name: Install all necessary packages
         run: pip install  yt_dlp
       - name: Run the ids script
-        run: python getvideoids.py      
+        run: python dumpvideoids.py      
         env:
           URL: ${{ github.event.inputs.channel }}          
       - name: Upload Episode from YouTube To Anchor.Fm
