@@ -19,6 +19,8 @@ if '/c/' in URL or '/@' in URL or '/channel/' in URL:
     ydl_opts = {
             # 'outtmpl': videopath+'/%(title)s'+'.mp4',
             'format': 'best',
+          'age_limit':18,
+
 #             'proxy': 'socks5://127.0.0.1:1080',
             # 'writesubtitles': 'true',
             # 'subtitleslangs': 'en', 
