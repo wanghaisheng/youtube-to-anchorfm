@@ -22,7 +22,7 @@ function getDownloaThumbnailOptions() {
   };
 }
 
-function getDownloadAudioOptions() {
+function getDownloadAudioOptions(videoId) {
   const options = {
     ...youtubeDlOptions,
     f: 'bestaudio',
@@ -30,7 +30,7 @@ function getDownloadAudioOptions() {
     forceOverwrites: true,
     skipUnavailableFragments:true,
     abortOnUnavailableFragment:true,
-    audioFormat: AUDIO_FILE_FORMAT,
+    audioFormat: videoId+AUDIO_FILE_FORMAT,
     o: env.AUDIO_FILE_TEMPLATE,
   };
   if (env.POSTPROCESSOR_ARGS.length > 0) {
@@ -93,7 +93,7 @@ async function downloadThumbnail(videoId) {
 async function downloadAudio(videoId) {
   console.log(`Downloading audio for video id ${videoId}`);
   try {
-    await youtubedl(getVideoUrl(videoId), getDownloadAudioOptions());
+    await youtubedl(getVideoUrl(videoId), getDownloadAudioOptions(videoId));
     console.log(`Downloaded audio for video id ${videoId}`);
   } catch (err) {
     throw new Error(`Unable to download audio: ${err} for ${videoId}`);
