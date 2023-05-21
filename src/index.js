@@ -29,7 +29,9 @@ async function main() {
   const arr = []
   files.forEach((val, i) => {
   
-    const youtubeVideoId = getYoutubeVideoId(path.join(dirPath, val));
+//     const youtubeVideoId = getYoutubeVideoId(path.join(dirPath, val));
+    console.log('this file is:',val)
+    const youtubeVideoId =val.replace(".json","");
 
     const youtubeVideoInfo = await getVideoInfo(youtubeVideoId);
     const { title, description, uploadDate } = youtubeVideoInfo;
