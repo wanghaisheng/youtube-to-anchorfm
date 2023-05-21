@@ -53,6 +53,7 @@ async function main() {
     
     
 }
+                }
 
 main()
   .then(() => console.log('Finished successfully.'))
