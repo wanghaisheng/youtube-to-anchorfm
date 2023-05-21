@@ -41,6 +41,14 @@ async function main() {
 
     console.log('Posting episode to anchorfm');
     await postEpisode(youtubeVideoInfo);
+    try {
+      const fileName = 'progress.txt'
+      fs.appendFileSync(fileName, youtubeVideoId+',', 'utf-8');
+    } catch(err) {
+      console.log('Error appending data to file in sync mode', err);
+    }
+    
+    
 }
 
 main()
