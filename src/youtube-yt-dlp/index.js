@@ -6,7 +6,6 @@ const youtubeDlOptions = {
   noCheckCertificates: true,
   noWarnings: true,
   preferFreeFormats: true,
-  ageLimit:18,
 };
 
 function getVideoUrl(videoId) {
@@ -29,6 +28,7 @@ function getDownloadAudioOptions() {
     f: 'bestaudio',
     x: true,
     forceOverwrites: true,
+    skipUnavailableFragments:true,
     audioFormat: AUDIO_FILE_FORMAT,
     o: env.AUDIO_FILE_TEMPLATE,
   };
