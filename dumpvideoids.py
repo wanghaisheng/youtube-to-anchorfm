@@ -29,10 +29,9 @@ if '/c/' in URL or '/@' in URL or '/channel/' in URL:
         info = ydl.extract_info(URL, download=False)
         channel_id=info['channel_id']
 
-        if not os.path.exists('./videos/'+channel_id):
-            os.makedirs('videos/'+channel_id)
+
     for entry in info['entries']:
         data={'id':entry['id']}
         json_obj = json.dumps(data)
-        with open('./videos/'+channel_id+'/'+entry['id']+"episode.json", "w") as file:
+        with open('./videos/'+entry['id']+"episode.json", "w") as file:
             file.write(json_obj)
