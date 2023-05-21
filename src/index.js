@@ -32,24 +32,29 @@ async function main() {
   
 //     const youtubeVideoId = getYoutubeVideoId(path.join(dirPath, val));
     console.log('this file is:',val)
-    const youtubeVideoId =val.replace(".json","");
+    if (val.includes(".json")){
+      const youtubeVideoId =val.replace(".json","");
 
-    const youtubeVideoInfo = await getVideoInfo(youtubeVideoId);
-    const { title, description, uploadDate } = youtubeVideoInfo;
-    console.log(`title: ${title}`);
-    console.log(`description: ${description}`);
-    console.log(`Upload date: ${JSON.stringify(uploadDate)}`);
+      const youtubeVideoInfo = await getVideoInfo(youtubeVideoId);
+      const { title, description, uploadDate } = youtubeVideoInfo;
+      console.log(`title: ${title}`);
+      console.log(`description: ${description}`);
+      console.log(`Upload date: ${JSON.stringify(uploadDate)}`);
 
-    await Promise.all([downloadThumbnail(youtubeVideoId), downloadAudio(youtubeVideoId)]);
+      await Promise.all([downloadThumbnail(youtubeVideoId), downloadAudio(youtubeVideoId)]);
 
-    console.log('Posting episode to anchorfm');
-    await postEpisode(youtubeVideoInfo);
-    try {
-      const fileName = 'progress.txt'
-      fs.appendFileSync(fileName, youtubeVideoId+',', 'utf-8');
-    } catch(err) {
-      console.log('Error appending data to file in sync mode', err);
+      console.log('Posting episode to anchorfm');
+      await postEpisode(youtubeVideoInfo);
+      try {
+        const fileName = 'progress.txt'
+        fs.appendFileSync(fileName, youtubeVideoId+',', 'utf-8');
+      } catch(err) {
+        console.log('Error appending data to file in sync mode', err);
+    }      
+      
+      
     }
+
     
     
 })
