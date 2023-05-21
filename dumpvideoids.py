@@ -6,6 +6,12 @@ URL = os.getenv('URL')
 # URL = 'https://www.youtube.com/c/DailyDoseComedy100'
 if not os.path.exists('./videos'):
     os.makedirs('videos')
+    with open('./videos/'+"progress.txt", "w") as file:
+        file.write("")
+done_ids=[]        
+with open('./videos/'+"progress.txt", "r") as file:
+    done_ids=text_file.readlines()[0].split(',')
+
 if '/c/' in URL or '/@' in URL or '/channel/' in URL:
     # ℹ️ See help(yt_dlp.YoutubeDL) for a list of available options and public functions
     ydl_opts = {
@@ -32,6 +38,7 @@ if '/c/' in URL or '/@' in URL or '/channel/' in URL:
 
     for entry in info['entries']:
         data={'id':entry['id']}
-        json_obj = json.dumps(data)
-        with open('./videos/'+entry['id']+"episode.json", "w") as file:
-            file.write(json_obj)
+        if not entry['id'] in done_ids:
+            json_obj = json.dumps(data)
+            with open('./videos/'+entry['id']+".json", "w") as file:
+                file.write(json_obj)
