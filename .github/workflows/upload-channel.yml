@@ -40,11 +40,7 @@ jobs:
             sudo apt-get install libnss3 libnss3-tools libxss1 libgtk-3-0 -y            
             sudo apt install ffmpeg
       - name: Install all necessary packages
-        run: pip install  yt_dlp
-      - name: Run the ids script
-        run: python dumpvideoids.py      
-        env:
-          URL: ${{ github.event.inputs.channel }}          
+        run: pip install  yt_dlp 
       - name: Upload Episode from YouTube To Anchor.Fm
         env:
           ANCHOR_EMAIL: ${{ github.event.inputs.ANCHOR_EMAIL }}     
@@ -56,5 +52,6 @@ jobs:
           videoorchannel: 'channel'
           playlisturl: ''
           URL: ${{ github.event.inputs.channel }}       
+      - run: python dumpvideoids.py                      
       - run: npm ci
       - run: npm start
