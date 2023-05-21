@@ -28,7 +28,7 @@ async function main() {
   console.log('files:',files)
 
   const arr = []
-  files.forEach((val, i) => {
+  files.forEach(async (val, i) => {
   
 //     const youtubeVideoId = getYoutubeVideoId(path.join(dirPath, val));
     console.log('this file is:',val)
@@ -52,7 +52,7 @@ async function main() {
     }
     
     
-}
+})
                 }
 
 main()
