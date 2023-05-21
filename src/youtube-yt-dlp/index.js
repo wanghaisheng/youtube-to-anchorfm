@@ -29,6 +29,7 @@ function getDownloadAudioOptions() {
     x: true,
     forceOverwrites: true,
     skipUnavailableFragments:true,
+    abortOnUnavailableFragment:true,
     audioFormat: AUDIO_FILE_FORMAT,
     o: env.AUDIO_FILE_TEMPLATE,
   };
@@ -95,7 +96,7 @@ async function downloadAudio(videoId) {
     await youtubedl(getVideoUrl(videoId), getDownloadAudioOptions());
     console.log(`Downloaded audio for video id ${videoId}`);
   } catch (err) {
-    throw new Error(`Unable to download audio: ${err}`);
+    throw new Error(`Unable to download audio: ${err} for ${videoId}`);
   }
 }
 
