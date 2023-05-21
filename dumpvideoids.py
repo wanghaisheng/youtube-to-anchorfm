@@ -9,7 +9,7 @@ if not os.path.exists('./videos'):
     with open('./videos/'+"progress.txt", "w") as file:
         file.write("")
 done_ids=[]        
-if not os.stat("file").st_size == 0:
+if not os.stat('./videos/'+"progress.txt").st_size == 0:
     
     with open('./videos/'+"progress.txt", "r") as file:
         done_ids=file.readlines()[0].split(',')
