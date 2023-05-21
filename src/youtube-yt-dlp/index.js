@@ -30,7 +30,9 @@ function getDownloadAudioOptions(videoId) {
     forceOverwrites: true,
     skipUnavailableFragments:true,
     abortOnUnavailableFragment:true,
-    audioFormat: videoId+"."+AUDIO_FILE_FORMAT,
+    audioFormat: AUDIO_FILE_FORMAT,
+  AUDIO_FILE_TEMPLATE: 'episode.%(ext)s',
+    
     o: env.AUDIO_FILE_TEMPLATE,
   };
   if (env.POSTPROCESSOR_ARGS.length > 0) {
