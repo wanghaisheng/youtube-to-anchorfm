@@ -6,6 +6,7 @@ const youtubeDlOptions = {
   noCheckCertificates: true,
   noWarnings: true,
   preferFreeFormats: true,
+  ageLimit:18
 };
 
 function getVideoUrl(videoId) {
